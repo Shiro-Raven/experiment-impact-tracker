@@ -15,7 +15,7 @@ if sys.version_info.major != 3:
     )
 
 setup(
-    name="experiment_impact_tracker",
+    name="impact_tracker_custom",
     packages=find_packages(),
     include_package_data=True,
     scripts=[

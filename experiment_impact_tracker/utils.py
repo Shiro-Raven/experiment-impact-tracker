@@ -136,20 +136,21 @@ def gather_additional_info(info, logdir):
     has_gpu = False
 
     if "gpu_info" in info.keys():
-        has_gpu = True
-        num_gpus = len(info["gpu_info"])
-        nvidia_power_draw_kw = df["nvidia_estimated_attributable_power_draw"] / 1000.0
-        nvidia_power_draw_kw.loc[len(nvidia_power_draw_kw)] = nvidia_power_draw_kw.loc[
-            len(nvidia_power_draw_kw) - 1
-        ]
-        gpu_absolute_util = df["average_gpu_estimated_utilization_absolute"]
-        gpu_absolute_util.loc[len(gpu_absolute_util)] = gpu_absolute_util.loc[
-            len(gpu_absolute_util) - 1
-        ]
+        # has_gpu = True
+        # num_gpus = len(info["gpu_info"])
+        # nvidia_power_draw_kw = df["nvidia_estimated_attributable_power_draw"] / 1000.0
+        # nvidia_power_draw_kw.loc[len(nvidia_power_draw_kw)] = nvidia_power_draw_kw.loc[
+        #     len(nvidia_power_draw_kw) - 1
+        # ]
+        # gpu_absolute_util = df["average_gpu_estimated_utilization_absolute"]
+        # gpu_absolute_util.loc[len(gpu_absolute_util)] = gpu_absolute_util.loc[
+        #     len(gpu_absolute_util) - 1
+        # ]
 
-        # elementwise multiplication and sum
-        kw_hr_nvidia = np.multiply(time_differences_in_hours, nvidia_power_draw_kw)
-
+        # # elementwise multiplication and sum
+        # kw_hr_nvidia = np.multiply(time_differences_in_hours, nvidia_power_draw_kw)
+        pass
+    
     kw_hr_rapl = (
         np.multiply(time_differences_in_hours, power_draw_rapl_kw)
         if power_draw_rapl_kw is not None
