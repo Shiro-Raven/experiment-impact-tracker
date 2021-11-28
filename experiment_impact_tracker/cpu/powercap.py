@@ -4,15 +4,11 @@ Modified from https://github.com/mozilla/energia/blob/8bfc8e2cf774b702ea1085a164
 import multiprocessing
 import os
 import platform
-import re
-import shlex
 import shutil
-import subprocess
 import sys
 import tempfile
 
 import pandas as pd
-from pandas import DataFrame
 
 sys.path.append("..")
 

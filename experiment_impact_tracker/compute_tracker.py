@@ -7,33 +7,23 @@ import subprocess
 import sys
 import time
 import traceback
-from datetime import datetime
 from pathlib import Path
 from queue import Empty as EmptyQueueException
-from subprocess import PIPE, Popen
-from sys import platform
 
-import numpy as np
-import pandas as pd
 import psutil
 import ujson as json
-from pandas.io.json import json_normalize
 
-from experiment_impact_tracker.cpu import rapl
-from experiment_impact_tracker.cpu.common import get_my_cpu_info
-from experiment_impact_tracker.cpu.intel import get_intel_power, get_rapl_power
-from experiment_impact_tracker.data_info_and_router import (DATA_HEADERS,
-                                                            INITIAL_INFO)
+from experiment_impact_tracker.data_info_and_router import DATA_HEADERS, INITIAL_INFO
 from experiment_impact_tracker.data_utils import *
-from experiment_impact_tracker.emissions.common import \
-    is_capable_realtime_carbon_intensity
-from experiment_impact_tracker.emissions.get_region_metrics import \
-    get_current_region_info_cached
-from experiment_impact_tracker.gpu.nvidia import (get_gpu_info,
-                                                  get_nvidia_gpu_power)
-from experiment_impact_tracker.utils import (get_timestamp, processify,
-                                             safe_file_path,
-                                             write_json_data_to_file)
+from experiment_impact_tracker.emissions.get_region_metrics import (
+    get_current_region_info_cached,
+)
+from experiment_impact_tracker.utils import (
+    get_timestamp,
+    processify,
+    safe_file_path,
+    write_json_data_to_file,
+)
 
 SLEEP_TIME = 1
 STOP_MESSAGE = "Stop"
@@ -290,7 +280,7 @@ class ImpactTracker(object):
         try:
             # the defaults for multiprocessing changed in python 3.8.
             # OS X multiprocessing starts processes with spawn instead of fork
-            multiprocessing.set_start_method("fork")
+            multiprocessing.set_start_method("fork", force=True)
             self.p, self.queue = launch_power_monitor(
                 self.logdir, self.initial_info, self.logger
             )
